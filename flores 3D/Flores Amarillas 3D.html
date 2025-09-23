@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz dia de las flores amarillas!❤️🌻</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/icon.png">
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-image: url('https://www.dl.dropboxusercontent.com/scl/fi/mc9hgtyin3t8g2bjp9jyj/back4.png?rlkey=z2cd4sc9uvgxl0sm34nrpcr7t&st=fk6s2vrv');
+            --bg-blur-amount: 4px;
+            --bg-overlay-color: rgba(224, 224, 224, 0.222);
+            --primary-color: #FF6347;
+            --primary-glow: #FF4500;
+            --click-me-color: #FFFFFF;
+            --click-me-glow: #ff9933;
+            --text-color-light: #ffffff;
+            --text-shadow: rgba(0, 0, 0, 0.5);
+            --modal-bg: rgba(0, 0, 0, 0.3);
+            --modal-backdrop-blur: 12px;
+            --modal-border-color: rgba(255, 255, 255, 0.4);
+            --modal-shadow: rgba(0, 0, 0, 0.25);
+            --image-border-color: rgba(255, 255, 255, 0.9);
+            --image-shadow-color: rgba(0, 0, 0, 0.2);
+            --title-text-color: var(--text-color-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Sour Gummy', sans-serif;
+            position: relative;
+        }
+
+        body {
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10+ */
+            user-select: none;
+            /* Sintaxis estándar */
+            -webkit-tap-highlight-color: transparent;
+            /* Elimina el resaltado al tocar en móviles */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-overlay-color);
+            backdrop-filter: blur(var(--bg-blur-amount));
+            z-index: 0;
+        }
+
+        #loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFDAB9, #FFB6C1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #loader-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-heart {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            position: relative;
+            transform: rotate(-45deg);
+            margin: 0 auto 50px auto;
+            animation: heart-pulse-intense 1.2s ease-in-out infinite;
+        }
+
+        .loader-heart::before,
+        .loader-heart::after {
+            content: '';
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .loader-heart::before {
+            top: -40px;
+            left: 0;
+        }
+
+        .loader-heart::after {
+            top: 0;
+            left: 40px;
+        }
+
+        @keyframes heart-pulse-intense {
+            0% {
+                transform: rotate(-45deg) scale(1);
+                filter: brightness(1);
+            }
+
+            50% {
+                transform: rotate(-45deg) scale(1.15);
+                filter: brightness(1.2);
+                box-shadow: 0 0 20px rgba(255, 99, 71, 0.6);
+            }
+
+            100% {
+                transform: rotate(-45deg) scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        .progress-bar-container {
+            width: 280px;
+            height: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-glow));
+            border-radius: 8px;
+            transition: width 0.4s ease-out;
+        }
+
+        #progress-text {
+            color: #333;
+            font-family: 'Sour Gummy', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        canvas#bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            cursor: grab;
+        }
+
+        canvas#bg:active {
+            cursor: grabbing;
+        }
+
+        .click-me-container {
+            position: fixed;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in;
+        }
+
+        #clickMeText {
+            color: var(--click-me-color);
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.8rem;
+            cursor: pointer;
+            text-shadow:
+                0 0 8px #fff,
+                0 0 18px #fff,
+                0 0 28px var(--click-me-glow),
+                0 0 38px var(--click-me-glow),
+                0 0 48px var(--click-me-glow);
+            transition: all 0.3s ease-in-out;
+            animation: heartbeat-intense 1.4s ease-in-out infinite;
+            font-weight: 700;
+        }
+
+        #clickMeText:hover {
+            text-shadow:
+                0 0 12px #fff,
+                0 0 28px var(--click-me-glow),
+                0 0 48px var(--click-me-glow),
+                0 0 68px var(--click-me-glow);
+            transform: scale(1.08);
+        }
+
+        @keyframes heartbeat-intense {
+            0% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+
+            14% {
+                transform: scale(1.12);
+                filter: brightness(1.15);
+            }
+
+            28% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+
+            42% {
+                transform: scale(1.12);
+                filter: brightness(1.15);
+            }
+
+            70% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        .modal-container.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--modal-bg);
+            backdrop-filter: blur(var(--modal-backdrop-blur));
+            -webkit-backdrop-filter: blur(var(--modal-backdrop-blur));
+            padding: 40px 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px var(--modal-shadow);
+            max-width: 920px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid var(--modal-border-color);
+            max-height: 85vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-glow);
+        }
+
+        .modal-container.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2.5rem;
+            color: var(--text-color-light);
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+            text-shadow: 0 0 8px var(--text-shadow);
+            z-index: 20;
+            font-family: 'Sour Gummy', sans-serif;
+        }
+
+        .close-button:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h1 {
+            font-family: 'Sour Gummy', sans-serif;
+            color: var(--title-text-color);
+            text-align: center;
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 8px var(--text-shadow);
+        }
+
+        .music-player-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .album-cover-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        #album-cover {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px var(--image-shadow-color);
+            animation: pulse-album 2.2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        #album-cover:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse-album {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 25px var(--image-shadow-color);
+            }
+
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 35px rgba(255, 99, 71, 0.4);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 25px var(--image-shadow-color);
+            }
+        }
+
+        .song-info {
+            text-align: center;
+            color: var(--text-color-light);
+            margin-top: 15px;
+        }
+
+        .song-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 1px 3px var(--text-shadow);
+            font-family: 'Sour Gummy', sans-serif;
+        }
+
+        .artist-name {
+            font-size: 1rem;
+            color: #b3b3b3;
+            margin: 5px 0;
+            text-shadow: 0 1px 3px var(--text-shadow);
+            font-family: 'Sour Gummy', sans-serif;
+            font-weight: 400;
+        }
+
+        .progress-container {
+            width: 100%;
+            margin-top: 18px;
+            position: relative;
+        }
+
+        .progress-bar-wrapper {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            margin: 8px 0;
+        }
+
+        #musicProgressBar {
+            width: 0%;
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 5px;
+            transition: width 0.1s linear;
+        }
+
+        .progress-thumb {
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            opacity: 1;
+            z-index: 10;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-thumb:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 3px 12px rgba(255, 99, 71, 0.4);
+        }
+
+        .progress-thumb:active {
+            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 4px 16px rgba(255, 99, 71, 0.6);
+        }
+
+        .progress-bar-wrapper:hover .progress-thumb {
+            opacity: 1;
+        }
+
+        .progress-time {
+            display: flex;
+            justify-content: space-between;
+            color: #b3b3b3;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            font-family: 'Sour Gummy', sans-serif;
+            font-weight: 400;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 22px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--text-color-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        .control-btn.play-pause {
+            font-size: 2.2rem;
+        }
+
+        .control-btn:hover {
+            color: var(--primary-glow);
+            transform: scale(1.1);
+        }
+
+        .control-btn.active {
+            color: var(--primary-color);
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .text-content p {
+            font-family: 'Sour Gummy', sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-color-light);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px var(--text-shadow);
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .carousel-section {
+            width: 100%;
+            perspective: 1200px;
+            min-height: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .carousel-container-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: grab;
+            touch-action: none;
+        }
+
+        .carousel-3d:active {
+            cursor: grabbing;
+        }
+
+        .carousel-item-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 240px;
+            height: 330px;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px var(--image-shadow-color);
+            border: 3px solid var(--image-border-color);
+            background: #000;
+        }
+
+        .carousel-item-3d img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            user-select: none;
+            pointer-events: none;
+            -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.2));
+        }
+
+        .date-signature {
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Sour Gummy', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
+            color: var(--text-color-light);
+            opacity: 0.9;
+            text-shadow: 0 1px 4px var(--text-shadow);
+        }
+
+        @media (max-width: 850px) {
+            .modal-content h1 {
+                font-size: 2.9rem;
+            }
+
+            .carousel-section {
+                min-height: 300px;
+                perspective: 1000px;
+            }
+
+            .carousel-item-3d {
+                width: 190px;
+                height: 260px;
+            }
+
+            #album-cover {
+                width: 180px;
+                height: 180px;
+            }
+
+            #clickMeText {
+                font-size: 4.0rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --bg-blur-amount: 2px;
+            }
+
+            .modal-content {
+                padding: 35px 20px 25px 20px;
+                width: 95%;
+            }
+
+            .modal-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .text-content p {
+                font-size: 1.05rem;
+            }
+
+            .close-button {
+                top: 10px;
+                right: 15px;
+            }
+
+            .date-signature {
+                font-size: 1.05rem;
+            }
+
+            .carousel-section {
+                min-height: 250px;
+                perspective: 800px;
+            }
+
+            .carousel-item-3d {
+                width: 160px;
+                height: 220px;
+            }
+
+            #album-cover {
+                width: 150px;
+                height: 150px;
+            }
+
+            .control-btn {
+                font-size: 1.2rem;
+            }
+
+            .control-btn.play-pause {
+                font-size: 1.9rem;
+            }
+
+            #clickMeText {
+                font-size: 3.6rem;
+            }
+        }
+
+        .texto-fantasia {
+            /* 1. Fuente más elegante y tamaño adecuado */
+            font-family: 'Dancing Script', cursive;
+            /* Usamos la fuente decorativa que ya tienes importada */
+            font-size: 1.7rem;
+            /* Hacemos el texto un poco más grande para que sea el centro de atención */
+            font-weight: 700;
+            line-height: 1.8;
+            text-align: center;
+            padding: 10px;
+
+            /* 2. Magia de colores: un gradiente como fondo del texto */
+            background-image: linear-gradient(-45deg,
+                    #ff9a9e 0%,
+                    #fad0c4 25%,
+                    #ffd1ff 50%,
+                    #a1c4fd 75%,
+                    #c2e9fb 100%);
+            background-size: 200% auto;
+            /* El tamaño es clave para que la animación funcione */
+
+            /* 3. Hacemos que el fondo (el gradiente) solo sea visible donde hay letras */
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            /* 4. Sombra de texto para darle profundidad y legibilidad */
+            text-shadow: 0 2px 8px rgba(67, 187, 87, 0.3);
+
+            /* 5. Animación para que los colores se muevan suavemente por las letras */
+            animation: moverColores 12s linear infinite;
+        }
+
+        /* Definimos la animación que mueve el gradiente de un lado a otro */
+        @keyframes moverColores {
+            to {
+                background-position: 200% center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader-container">
+        <div class="loader-content">
+            <div class="loader-heart"></div>
+            <div class="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+            <p id="progress-text">Cargando campo de flores... <span id="progress-percent">0%</span></p>
+        </div>
+    </div>
+    <canvas id="bg"></canvas>
+    <audio id="musicPlayer"></audio>
+
+    <div class="click-me-container">
+        <h2 id="clickMeText">¡DESCUBRE TU SORPRESA!</h2>
+    </div>
+
+    <div id="modalContainer" class="modal-container">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h1>¡Feliz 21 de septiembre!🌻</h1>
+
+            <div class="music-player-container">
+                <div class="album-cover-container">
+                    <img id="album-cover" src="images/song1.jpeg" alt="Album Cover">
+                </div>
+                <div class="song-info">
+                    <h2 id="song-title" class="song-title">Those Eyes</h2>
+                    <p id="artist-name" class="artist-name">New West</p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar-wrapper">
+                        <div id="musicProgressBar"></div>
+                        <div class="progress-thumb"></div>
+                    </div>
+                    <div class="progress-time">
+                        <span id="current-time">0:00</span>
+                        <span id="total-time">0:00</span>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="control-btn shuffle"><i class="fas fa-random"></i></button>
+                    <button class="control-btn prev"><i class="fas fa-backward"></i></button>
+                    <button class="control-btn play-pause"><i class="fas fa-play"></i></button>
+                    <button class="control-btn next"><i class="fas fa-forward"></i></button>
+                    <button class="control-btn repeat"><i class="fas fa-redo"></i></button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="text-content">
+                    <p class="texto-fantasia"> Quiero que sepas que eres mi
+                        primer pensamiento al despertar y mi último antes de dormir. Gracias por llenar mis días de luz,
+                        por tu paciencia infinita, tu cariño incondicional y por cada una de las risas que me sacas.
+                        Eres mi refugio y mi aventura. Te amo más de lo que las palabras pueden expresar.</p>
+                </div>
+              
+                <div class="carousel-section">
+                    <div class="carousel-container-3d">
+                        <div class="carousel-3d" id="imageCarousel">
+                            <div class="carousel-item-3d"><img
+                                    src="data:image/jpeg;base64,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"
+                                    alt="Recuerdo 1"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://images.unsplash.com/photo-1641617254442-30e517accac0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyZWphJTIwYWJyYXolQzMlQTFuZG9zZXxlbnwwfHwwfHx8MA%3D%D%D"
+                                    alt="Recuerdo 2"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://www.revistamoi.com/wp-content/uploads/2016/05/pareja-b.jpg"
+                                    alt="Recuerdo 3"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHrzZZ3Vg3r6KuLOyFW37m6OsmnAfSVgx8cA&s"
+                                    alt="Recuerdo 4"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTCfpatblA5P-OPJNwD1VWAdKZC-NehGr75Q&s"
+                                    alt="Recuerdo 5"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://niudalia.es/wp-content/uploads/2024/03/Tulipanes-2.jpg"
+                                    alt="Recuerdo 6"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ======== NUEVO CARRUSEL AÑADIDO ======== -->
+                <div class="carousel-section">
+                    <div class="carousel-container-3d">
+                        <div class="carousel-3d" id="imageCarousel2">
+                            <div class="carousel-item-3d"><img
+                                    src="https://scontent-lim1-1.xx.fbcdn.net/v/t39.30808-6/529897548_2441009186284228_4265013460513748983_n.jpg?stp=c253.0.1542.1542a_dst-jpg_s206x206_tt6&_nc_cat=106&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeGdxi3JNblKP3CaS88KdURKJlFldZtZINgmUWV1m1kg2NUXJhzS3Ynx5VRnG7Jx29HediUpaFvjCN2pim6bZTLO&_nc_ohc=2tCf5PK2BIEQ7kNvwE8YU8R&_nc_oc=Adl73sHLm0qsH6mBExUIlrqKCl3Fi-jAWt_UimeTvcmw678lM0vskOPv6OdLP5MnCic&_nc_zt=23&_nc_ht=scontent-lim1-1.xx&_nc_gid=R4myH-3XJ0PSioJMQv4TcA&oh=00_AfZsgsDMUds1tF5XIIApI1Zd8YgjI19t_4OvJ1GaCIweKg&oe=68D26B32"
+                                    alt="Recuerdo 7"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://scontent-lim1-1.xx.fbcdn.net/v/t39.30808-6/470129071_2240948989623583_7876279762920458473_n.jpg?stp=dst-jpg_s206x206_tt6&_nc_cat=106&ccb=1-7&_nc_sid=fe5ecc&_nc_eui2=AeGoCxCzDf363482lHgT5JTFP9u3JBW0s30_27ckFbSzfZluDVNsTat2EUssgdr61Uy2IZsZiNezbm6M1YuwRFjh&_nc_ohc=As4Vj2t5m-EQ7kNvwFCBZb3&_nc_oc=Adm2AtSz_e7X8PZ7QoGExryTrVjmy5GSv6_4U9tymipvxIN412P8BFKXlPsuySuYNkg&_nc_zt=23&_nc_ht=scontent-lim1-1.xx&_nc_gid=tP1NpvJdP8iM1_ujYi0M7A&oh=00_AfYXZxj3wtohnHAVnlFY_RoR1icmK6mtbhAk49ozxcmOhw&oe=68D25164"
+                                    alt="Recuerdo 8"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://scontent-lim1-1.xx.fbcdn.net/v/t39.30808-6/467993599_2226540547731094_3798365345601592089_n.jpg?stp=c329.0.622.622a_dst-jpg_s206x206_tt6&_nc_cat=110&ccb=1-7&_nc_sid=50c75d&_nc_eui2=AeFO4SGab1lIV7L6kRaMYOM8jXTZ9WUzXHONdNn1ZTNcc-Iu5LFG46Cf70L-9XLc-bPC6eLvofAE3C1dI1xQ-ARU&_nc_ohc=dKu8PcPLIu4Q7kNvwH2-EGS&_nc_oc=AdnLbWkvRi2sxo0X8jXOOZisjjEAQi0tzdJbAWljPjIwjDLinLJoOwYheoL_bCrjeVs&_nc_zt=23&_nc_ht=scontent-lim1-1.xx&_nc_gid=UEsaNeoVu6Pj6dkTYrErjw&oh=00_AfYU3zFH2KxkBW_mTAsFxpU7vKHscF3MCuehwRDvIyaQKQ&oe=68D256F0"
+                                    alt="Recuerdo 9"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://images.pexels.com/photos/317156/pexels-photo-317156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                    alt="Recuerdo 10"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://scontent-lim1-1.xx.fbcdn.net/v/t39.30808-6/476473297_2283647498687065_1085288933102206888_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHdJlyT30O0jvGSuRNK8k550tRDoXoU6EfS1EOhehToR_gal1QnPTrec0uEhVHbIlIyQfe8IyxynosaHhApL6ep&_nc_ohc=zW8aDJvrZU8Q7kNvwHjf7mr&_nc_oc=Adm82hcxGSYxlB31bffDSlzCrtbNZ7STCDdJfIaYe3N-kKIfILOPDAdrhoDTnO5MLgQ&_nc_zt=23&_nc_ht=scontent-lim1-1.xx&_nc_gid=bfLIoW0aDD3QLlN3mPB2hg&oh=00_AfaT4-_TvNHuW9IZ89eXy0bosR4sbXIRr1mDZ3Ky2mSXkg&oe=68D2646E"
+                                    alt="Recuerdo 11"></div>
+                            <div class="carousel-item-3d"><img
+                                    src="https://scontent-lim1-1.xx.fbcdn.net/v/t39.30808-1/418494121_2005480573170427_5180053480116694903_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeFzMgAMIuzwYETJHdT90g595rZjkZz5vQbmtmORnPm9BikZC26cU4uUH9KZ4JvBlIGdpSMnma1vOm6EipdjgNW9&_nc_ohc=LvoUgyqmu_kQ7kNvwFPOxUH&_nc_oc=Adk-s0p5fnSuyBgKSYpRTo1OuP4hEr5hcLoVf6DESW48WmEhoSbS5CFuC5ACKRe805k&_nc_zt=24&_nc_ht=scontent-lim1-1.xx&_nc_gid=bfLIoW0aDD3QLlN3mPB2hg&oh=00_AfYFtbrBFpDRRbncjcdZhdVCYPDIkU_5JvvDkX52bx0QWg&oe=68D2676F"
+                                    alt="Recuerdo 12"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ======== FIN DEL NUEVO CARRUSEL ======== -->
+
+                <div class="text-content">
+                    <p class="texto-fantasia"> gracias por tu amistad te quiero mucho</p>
+                </div>
+            </div>
+            <p class="date-signature">18/09/25</p>
+        </div>
+    </div>
+
+    <script
+        type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.166.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.166.0/examples/jsm/" } }</script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        const loaderContainer = document.getElementById('loader-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercent = document.getElementById('progress-percent');
+        const clickMeContainer = document.querySelector('.click-me-container');
+
+        let progress = 0;
+        let modelLoaded = false;
+        let sceneReady = false;
+
+        const interval = setInterval(() => {
+            // Progreso simulado hasta 60%
+            if (progress < 60) {
+                progress += Math.random() * 8;
+                if (progress > 60) progress = 60;
+            }
+            // Esperar a que el modelo esté cargado para completar
+            else if (modelLoaded && sceneReady) {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+            }
+
+            progressBar.style.width = progress + '%';
+            progressPercent.textContent = Math.floor(progress) + '%';
+
+            // Completar carga cuando llegue al 100%
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loaderContainer.classList.add('hidden');
+                    clickMeContainer.style.opacity = '1';
+                }, 800);
+            }
+        }, 300);
+
+        let renderer, scene, camera;
+        let heartModel = null;
+        let lightParticles;
+
+        let isMouseDown = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let modelRotationVelocity = { x: 0, y: 0 };
+        const autoRotationSpeed = 0.003;
+
+        function createParticleTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const context = canvas.getContext('2d');
+            const gradient = context.createRadialGradient(32, 32, 0, 32, 32, 32);
+            gradient.addColorStop(0, 'rgba(255,255,255,1)');
+            gradient.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+            gradient.addColorStop(0.8, 'rgba(255,255,255,0.1)');
+            gradient.addColorStop(1, 'rgba(255,255,255,0)');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, 64, 64);
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            camera.position.set(0, 1, 8);
+            camera.lookAt(0, 1, 0);
+
+            renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#bg'), alpha: true, antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.0;
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            const keyLight = new THREE.DirectionalLight(0xffd700, 1.8);
+            keyLight.position.set(-10, 10, 5);
+            keyLight.castShadow = true;
+            keyLight.shadow.mapSize.width = 2048;
+            keyLight.shadow.mapSize.height = 2048;
+            scene.add(keyLight);
+
+            const fillLight = new THREE.DirectionalLight(0xff6b9d, 1.0);
+            fillLight.position.set(10, 5, 2);
+            scene.add(fillLight);
+
+            const rimLight = new THREE.DirectionalLight(0x9d50ff, 0.7);
+            rimLight.position.set(0, -10, -5);
+            scene.add(rimLight);
+
+            const loader = new GLTFLoader();
+            loader.load(
+                'https://www.dl.dropboxusercontent.com/scl/fi/2y4ih0ut9vifd0v2zdevy/Flower.glb?rlkey=8ddf735p0pqx7ijz3av460shr&st=oos72t6b',
+                function (gltf) {
+                    const loadedModel = gltf.scene;
+                    const pivot = new THREE.Group();
+                    scene.add(pivot);
+
+                    const box = new THREE.Box3().setFromObject(loadedModel);
+                    const center = new THREE.Vector3();
+                    box.getCenter(center);
+                    loadedModel.position.sub(center);
+
+                    pivot.add(loadedModel);
+
+                    heartModel = pivot;
+
+                    heartModel.scale.set(5, 5, 5);
+                    heartModel.position.set(0, 1, 5);
+
+                    loadedModel.traverse((child) => {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                        }
+                    });
+
+                    // Marcar modelo como cargado
+                    modelLoaded = true;
+                    console.log("Modelo 3D cargado correctamente");
+                },
+                function (progress) {
+                    // Mostrar progreso de carga del modelo
+                    const percentLoaded = (progress.loaded / progress.total) * 100;
+                    console.log('Progreso del modelo: ' + Math.round(percentLoaded) + '%');
+                },
+                function (error) {
+                    console.error('Error al cargar el modelo "Flower.glb". Asegúrate de que la ruta es correcta.', error);
+                    createFallbackHeart();
+                    modelLoaded = true; // Marcar como cargado incluso si falla
+                }
+            );
+
+            const envMapLoader = new THREE.CubeTextureLoader();
+            const envMap = envMapLoader.load([
+                'https://threejs.org/examples/textures/cube/Park3Med/px.jpg', 'https://threejs.org/examples/textures/cube/Park3Med/nx.jpg',
+                'https://threejs.org/examples/textures/cube/Park3Med/py.jpg', 'https://threejs.org/examples/textures/cube/Park3Med/ny.jpg',
+                'https://threejs.org/examples/textures/cube/Park3Med/pz.jpg', 'https://threejs.org/examples/textures/cube/Park3Med/nz.jpg'
+            ]);
+            scene.environment = envMap;
+
+            const particleTexture = createParticleTexture();
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 5000;
+            const posArray = new Float32Array(particlesCount * 3);
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * (i % 3 === 1 ? 50 : 40);
+            }
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMaterial = new THREE.PointsMaterial({
+                map: particleTexture, size: 0.15, blending: THREE.AdditiveBlending,
+                transparent: true, depthWrite: false, opacity: 0.9, sizeAttenuation: true
+            });
+            lightParticles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(lightParticles);
+
+            // Marcar escena como lista
+            sceneReady = true;
+
+            function createFallbackHeart() {
+                const heartShape = new THREE.Shape();
+                const x = -2.5, y = -5;
+                heartShape.moveTo(x + 2.5, y + 2.5);
+                heartShape.bezierCurveTo(x + 2.5, y + 2.5, x + 2, y, x, y);
+                heartShape.bezierCurveTo(x - 3, y, x - 3, y + 3.5, x - 3, y + 3.5);
+                heartShape.bezierCurveTo(x - 3, y + 5.5, x - 1.5, y + 7.7, x + 2.5, y + 9.5);
+                heartShape.bezierCurveTo(x + 6, y + 7.7, x + 8, y + 5.5, x + 8, y + 3.5);
+                heartShape.bezierCurveTo(x + 8, y + 3.5, x + 8, y, x + 5, y);
+                heartShape.bezierCurveTo(x + 3.5, y, x + 2.5, y + 2.5, x + 2.5, y + 2.5);
+                const extrudeSettings = { steps: 8, depth: 2.5, bevelEnabled: true, bevelThickness: 0.8, bevelSize: 0.5, bevelOffset: -0.1, bevelSegments: 32 };
+                const geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+                const material = new THREE.MeshPhysicalMaterial({ color: 0xef2b4c, metalness: 0.3, roughness: 0.2, clearcoat: 0.8, clearcoatRoughness: 0.2, emissive: 0x661122, emissiveIntensity: 0.6, envMapIntensity: 1.0 });
+
+                heartModel = new THREE.Mesh(geometry, material);
+                heartModel.scale.set(0.06, 0.06, 0.06);
+                heartModel.position.set(0, 1, 0);
+                heartModel.rotation.x = Math.PI;
+                heartModel.castShadow = true;
+                heartModel.receiveShadow = true;
+                scene.add(heartModel);
+            }
+
+            const canvas = renderer.domElement;
+
+            function handleDragStart(clientX, clientY) {
+                if (isModalOpen) return;
+                isMouseDown = true;
+                previousMousePosition = { x: clientX, y: clientY };
+                modelRotationVelocity = { x: 0, y: 0 };
+                canvas.style.cursor = 'grabbing';
+            }
+
+            function handleDragMove(clientX, clientY) {
+                if (!isMouseDown || isModalOpen || !heartModel) return;
+
+                const deltaX = clientX - previousMousePosition.x;
+                heartModel.rotation.y += deltaX * 0.005;
+                modelRotationVelocity = { x: 0, y: deltaX * 0.005 };
+                previousMousePosition = { x: clientX, y: clientY };
+            }
+
+            function handleDragEnd() {
+                isMouseDown = false;
+                canvas.style.cursor = 'grab';
+            }
+
+            canvas.addEventListener('mousedown', (e) => handleDragStart(e.clientX, e.clientY));
+            canvas.addEventListener('mousemove', (e) => handleDragMove(e.clientX, e.clientY));
+            document.addEventListener('mouseup', handleDragEnd);
+            canvas.addEventListener('mouseleave', handleDragEnd);
+
+            canvas.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    handleDragStart(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    handleDragMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: false });
+
+            canvas.addEventListener('touchend', handleDragEnd);
+            canvas.addEventListener('touchcancel', handleDragEnd);
+
+            const clock = new THREE.Clock();
+            let isModalOpen = false;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                if (heartModel) {
+                    const pulse = Math.sin(elapsedTime * 2.5) * 0.015 + 1;
+                    const baseScale = heartModel.userData.baseScale || { x: heartModel.scale.x, y: heartModel.scale.y, z: heartModel.scale.z };
+                    if (!heartModel.userData.baseScale) {
+                        heartModel.userData.baseScale = { x: heartModel.scale.x, y: heartModel.scale.y, z: heartModel.scale.z };
+                    }
+                    heartModel.scale.set(baseScale.x * pulse, baseScale.y * pulse, baseScale.z * pulse);
+
+                    if (!isModalOpen && !isMouseDown) {
+                        if (Math.abs(modelRotationVelocity.y) > 0.0001) {
+                            heartModel.rotation.y += modelRotationVelocity.y;
+                            modelRotationVelocity.y *= 0.95;
+                        } else {
+                            heartModel.rotation.y += autoRotationSpeed;
+                        }
+                    }
+                }
+
+                const particlePositions = lightParticles.geometry.attributes.position.array;
+                for (let i = 0; i < particlesCount * 3; i += 3) {
+                    particlePositions[i + 1] += 0.02;
+                    if (particlePositions[i + 1] > 25) {
+                        particlePositions[i + 1] = -25;
+                        particlePositions[i] = (Math.random() - 0.5) * 40;
+                    }
+                }
+                lightParticles.geometry.attributes.position.needsUpdate = true;
+
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                if (!isModalOpen) {
+                    renderer.setPixelRatio(window.devicePixelRatio);
+                }
+            });
+
+            animate();
+
+            const modalContainer = document.getElementById('modalContainer');
+            const clickMeText = document.getElementById('clickMeText');
+            const closeButton = document.querySelector('.close-button');
+            const music = document.getElementById('musicPlayer');
+            let isFirstOpen = true;
+            const playPauseBtn = document.querySelector('.play-pause');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const shuffleBtn = document.querySelector('.shuffle');
+            const repeatBtn = document.querySelector('.repeat');
+            const progressBarWrapper = document.querySelector('.progress-bar-wrapper');
+            const musicProgressBar = document.getElementById('musicProgressBar');
+            const progressThumb = document.querySelector('.progress-thumb');
+            const currentTime = document.getElementById('current-time');
+            const totalTime = document.getElementById('total-time');
+            const albumCover = document.getElementById('album-cover');
+            const songTitle = document.getElementById('song-title');
+            const artistName = document.getElementById('artist-name');
+
+            const songs = [
+                { title: "When I Was Your Man", artist: "Bruno Mars", cover: "https://www.dl.dropboxusercontent.com/scl/fi/4lyhzymglsh2rjc2hwxsw/song1.jpeg?rlkey=higl2ym6ksnfa2rv58a1fwf0w&st=n45h54q0", audio: "https://www.dl.dropboxusercontent.com/scl/fi/ut3qvmpatxuh37vzbbvum/sound1.mp3?rlkey=9c7o5tkmyf9hb0uxab9eged39&st=4f50amj3" },
+                { title: "Flores Amarillas", artist: "Floricienta", cover: "https://www.dl.dropboxusercontent.com/scl/fi/d2thqu8931mge04he97vt/song2.jpeg?rlkey=48wvj60qdks85p40kjwdfv7i1&st=0iyrpajc", audio: "https://www.dl.dropboxusercontent.com/scl/fi/e96pg8t3d3t71s9jd36wz/sound2.mp3?rlkey=u9bqefuupj7qns14gy6v4qjht&st=6yev3mbt" },
+            ];
+
+            let currentSongIndex = 0;
+            let isDraggingMusic = false;
+            let isShuffle = false;
+            let isRepeat = false;
+            let isLoading = false;
+            let musicReady = false;
+
+            function loadSong(index) {
+                const song = songs[index];
+                isLoading = true;
+                musicReady = false;
+
+                // Actualizar información visual inmediatamente
+                albumCover.src = song.cover;
+                songTitle.textContent = song.title;
+                artistName.textContent = song.artist;
+
+                // Resetear progreso visual
+                musicProgressBar.style.width = '0%';
+                progressThumb.style.left = '0%';
+                currentTime.textContent = "0:00";
+
+                // Cargar nueva canción
+                music.src = song.audio;
+
+                // Esperar a que se carguen los metadatos
+                music.addEventListener('loadedmetadata', function onLoadedMetadata() {
+                    totalTime.textContent = formatTime(music.duration);
+                    music.removeEventListener('loadedmetadata', onLoadedMetadata);
+                });
+
+                music.addEventListener('canplaythrough', function onCanPlayThrough() {
+                    isLoading = false;
+                    musicReady = true;
+                    console.log("Canción lista para reproducir");
+                    music.removeEventListener('canplaythrough', onCanPlayThrough);
+                });
+
+                music.addEventListener('loadeddata', function onLoadedData() {
+                    isLoading = false;
+                    musicReady = true;
+                    music.removeEventListener('loadeddata', onLoadedData);
+                });
+            }
+
+            function formatTime(seconds) {
+                if (isNaN(seconds) || seconds < 0) return "0:00";
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            function playMusic() {
+                if (musicReady && music.readyState >= 2) {
+                    music.play().then(() => {
+                        console.log("Música reproduciéndose correctamente");
+                    }).catch(e => {
+                        console.log("Error al reproducir:", e);
+                        // Intentar reproducir después de interacción del usuario
+                        document.addEventListener('click', function tryPlayAgain() {
+                            music.play().then(() => {
+                                console.log("Música reproduciéndose tras interacción");
+                                document.removeEventListener('click', tryPlayAgain);
+                            }).catch(console.log);
+                        }, { once: true });
+                    });
+                }
+            }
+
+            function pauseMusic() {
+                music.pause();
+            }
+
+            function playNextSong() {
+                if (isShuffle) {
+                    let randomIndex;
+                    do {
+                        randomIndex = Math.floor(Math.random() * songs.length);
+                    } while (songs.length > 1 && randomIndex === currentSongIndex);
+                    currentSongIndex = randomIndex;
+                } else {
+                    currentSongIndex = (currentSongIndex + 1) % songs.length;
+                }
+                loadSong(currentSongIndex);
+
+                // Reproducir cuando esté listo
+                const playWhenReady = () => {
+                    if (musicReady) {
+                        playMusic();
+                    } else {
+                        setTimeout(playWhenReady, 100);
+                    }
+                };
+                playWhenReady();
+            }
+
+            function playPrevSong() {
+                if (isShuffle) {
+                    playNextSong();
+                } else {
+                    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                }
+                loadSong(currentSongIndex);
+
+                // Reproducir cuando esté listo
+                const playWhenReady = () => {
+                    if (musicReady) {
+                        playMusic();
+                    } else {
+                        setTimeout(playWhenReady, 100);
+                    }
+                };
+                playWhenReady();
+            }
+
+            function openModal() {
+                if (!modalContainer.classList.contains('active')) {
+                    modalContainer.classList.add('active');
+                    isModalOpen = true;
+
+                    if (isFirstOpen) {
+                        // Asegurar que la música se reproduzca automáticamente
+                        setTimeout(() => {
+                            const attemptAutoplay = () => {
+                                if (musicReady) {
+                                    playMusic();
+                                } else {
+                                    setTimeout(attemptAutoplay, 100);
+                                }
+                            };
+                            attemptAutoplay();
+                        }, 500);
+                        isFirstOpen = false;
+                    }
+                    if (renderer) renderer.setPixelRatio(window.devicePixelRatio * 0.5);
+                }
+            }
+
+            function closeModal() {
+                if (modalContainer.classList.contains('active')) {
+                    modalContainer.classList.remove('active');
+                    isModalOpen = false;
+                    if (renderer) renderer.setPixelRatio(window.devicePixelRatio);
+                }
+            }
+
+            clickMeText.addEventListener('click', openModal);
+            closeButton.addEventListener('click', closeModal);
+            modalContainer.addEventListener('dblclick', (e) => {
+                if (e.target === modalContainer) closeModal();
+            });
+
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            let dragOccurred = false;
+            canvas.addEventListener('mousemove', () => {
+                if (isMouseDown) dragOccurred = true;
+            });
+            canvas.addEventListener('mousedown', () => {
+                dragOccurred = false;
+            });
+
+            window.addEventListener('click', (event) => {
+                if (dragOccurred) {
+                    dragOccurred = false;
+                    return;
+                }
+                if (!isModalOpen) {
+                    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                    raycaster.setFromCamera(mouse, camera);
+                    if (heartModel) {
+                        const intersects = raycaster.intersectObject(heartModel, true);
+                        if (intersects.length > 0) { openModal(); }
+                    }
+                }
+            }, false);
+
+            // Event listeners del reproductor mejorados
+            playPauseBtn.addEventListener('click', () => {
+                if (music.paused) {
+                    playMusic();
+                } else {
+                    pauseMusic();
+                }
+            });
+
+            music.addEventListener('play', () => {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            });
+
+            music.addEventListener('pause', () => {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+
+            music.addEventListener('timeupdate', () => {
+                if (!isDraggingMusic && !isNaN(music.duration) && music.duration > 0) {
+                    const progress = (music.currentTime / music.duration) * 100;
+                    musicProgressBar.style.width = `${progress}%`;
+                    progressThumb.style.left = `${progress}%`;
+                    currentTime.textContent = formatTime(music.currentTime);
+                }
+            });
+
+            music.addEventListener('loadedmetadata', () => {
+                totalTime.textContent = formatTime(music.duration);
+            });
+
+            music.addEventListener('ended', () => {
+                if (isRepeat) {
+                    music.currentTime = 0;
+                    playMusic();
+                } else {
+                    playNextSong();
+                }
+            });
+
+            // Función mejorada para saltar a cualquier parte de la canción
+            function setProgress(e) {
+                if (isNaN(music.duration) || music.duration <= 0) return;
+
+                e.preventDefault();
+                const rect = progressBarWrapper.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const percentage = Math.max(0, Math.min(100, (clickX / width) * 100));
+                const newTime = (percentage / 100) * music.duration;
+
+                // Actualizar posición visual inmediatamente
+                musicProgressBar.style.width = `${percentage}%`;
+                progressThumb.style.left = `${percentage}%`;
+                currentTime.textContent = formatTime(newTime);
+
+                // Establecer el tiempo de la canción
+                music.currentTime = newTime;
+            }
+
+            // Event listeners mejorados para la barra de progreso
+            progressBarWrapper.addEventListener('click', setProgress);
+
+            // Mejorar el arrastre del thumb
+            let startDragX = 0;
+
+            progressThumb.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                isDraggingMusic = true;
+                startDragX = e.clientX;
+                document.addEventListener('selectstart', preventSelect);
+            });
+
+            function preventSelect(e) {
+                e.preventDefault();
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDraggingMusic && !isNaN(music.duration) && music.duration > 0) {
+                    e.preventDefault();
+                    const rect = progressBarWrapper.getBoundingClientRect();
+                    let percentage = ((e.clientX - rect.left) / rect.width) * 100;
+                    percentage = Math.max(0, Math.min(100, percentage));
+
+                    musicProgressBar.style.width = `${percentage}%`;
+                    progressThumb.style.left = `${percentage}%`;
+                    currentTime.textContent = formatTime((percentage / 100) * music.duration);
+                }
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                if (isDraggingMusic) {
+                    isDraggingMusic = false;
+                    setProgress(e);
+                    document.removeEventListener('selectstart', preventSelect);
+                }
+            });
+
+            // Soporte táctil mejorado para dispositivos móviles
+            progressBarWrapper.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isDraggingMusic = true;
+            }, { passive: false });
+
+            progressBarWrapper.addEventListener('touchmove', (e) => {
+                if (isDraggingMusic && !isNaN(music.duration) && music.duration > 0) {
+                    e.preventDefault();
+                    const rect = progressBarWrapper.getBoundingClientRect();
+                    const touch = e.touches[0];
+                    let percentage = ((touch.clientX - rect.left) / rect.width) * 100;
+                    percentage = Math.max(0, Math.min(100, percentage));
+
+                    musicProgressBar.style.width = `${percentage}%`;
+                    progressThumb.style.left = `${percentage}%`;
+                    currentTime.textContent = formatTime((percentage / 100) * music.duration);
+                }
+            }, { passive: false });
+
+            progressBarWrapper.addEventListener('touchend', (e) => {
+                if (isDraggingMusic) {
+                    e.preventDefault();
+                    isDraggingMusic = false;
+
+                    // Simular el evento de clic para establecer la posición final
+                    const rect = progressBarWrapper.getBoundingClientRect();
+                    const touch = e.changedTouches[0];
+                    const fakeEvent = {
+                        clientX: touch.clientX,
+                        preventDefault: () => { }
+                    };
+                    setProgress(fakeEvent);
+                }
+            }, { passive: false });
+
+            nextBtn.addEventListener('click', playNextSong);
+            prevBtn.addEventListener('click', playPrevSong);
+
+            shuffleBtn.addEventListener('click', () => {
+                isShuffle = !isShuffle;
+                shuffleBtn.classList.toggle('active', isShuffle);
+            });
+
+            repeatBtn.addEventListener('click', () => {
+                isRepeat = !isRepeat;
+                repeatBtn.classList.toggle('active', isRepeat);
+            });
+
+            // Cargar la primera canción al inicializar
+            loadSong(currentSongIndex);
+
+            // --- Lógica del primer carrusel ---
+            const carousel = document.getElementById('imageCarousel');
+            if (carousel) {
+                const items = carousel.querySelectorAll('.carousel-item-3d');
+                let radius, isCarouselDragging = false, startX = 0, currentRotation = 0, targetRotation = 0, autoRotateTimeout, animationFrameId;
+                const angle = 360 / items.length;
+
+                const updateRadius = () => {
+                    if (window.innerWidth <= 480) radius = 180;
+                    else if (window.innerWidth <= 850) radius = 220;
+                    else radius = 260;
+                };
+
+                const arrangeItems = () => {
+                    updateRadius();
+                    items.forEach((item, index) => {
+                        item.style.transform = `rotateY(${angle * index}deg) translateZ(${radius}px)`;
+                    });
+                };
+
+                const dragStart = (e) => {
+                    isCarouselDragging = true;
+                    startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                    carousel.style.transition = 'none';
+                    stopAutoRotate();
+                };
+
+                const dragging = (e) => {
+                    if (!isCarouselDragging) return;
+                    const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                    const diffX = currentX - startX;
+                    const sensitivity = window.innerWidth <= 850 ? 0.7 : 0.5;
+                    targetRotation = currentRotation + diffX * sensitivity;
+                    carousel.style.transform = `rotateY(${targetRotation}deg)`;
+                };
+
+                const dragEnd = () => {
+                    if (!isCarouselDragging) return;
+                    isCarouselDragging = false;
+                    carousel.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    currentRotation = targetRotation;
+                    restartAutoRotateWithDelay();
+                };
+
+                const animateRotation = () => {
+                    if (isCarouselDragging) return;
+                    const rotationSpeed = 0.28;
+                    targetRotation -= rotationSpeed;
+                    currentRotation -= rotationSpeed;
+                    carousel.style.transform = `rotateY(${targetRotation}deg)`;
+                    animationFrameId = requestAnimationFrame(animateRotation);
+                };
+
+                const stopAutoRotate = () => {
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    clearTimeout(autoRotateTimeout);
+                };
+
+                const startAutoRotate = () => {
+                    stopAutoRotate();
+                    animationFrameId = requestAnimationFrame(animateRotation);
+                };
+
+                const restartAutoRotateWithDelay = () => {
+                    stopAutoRotate();
+                    autoRotateTimeout = setTimeout(startAutoRotate, 3000);
+                };
+
+                carousel.addEventListener('mousedown', dragStart);
+                document.addEventListener('mousemove', dragging);
+                document.addEventListener('mouseup', dragEnd);
+                carousel.addEventListener('touchstart', dragStart, { passive: true });
+                carousel.addEventListener('touchmove', dragging, { passive: true });
+                carousel.addEventListener('touchend', dragEnd);
+
+                const modalObserver = new MutationObserver(mutations => {
+                    mutations.forEach(mutation => {
+                        if (mutation.attributeName === 'class') {
+                            const isActive = mutation.target.classList.contains('active');
+                            if (isActive) {
+                                arrangeItems();
+                                startAutoRotate();
+                            } else {
+                                stopAutoRotate();
+                            }
+                        }
+                    });
+                });
+                modalObserver.observe(modalContainer, { attributes: true });
+                window.addEventListener('resize', arrangeItems);
+            }
+
+            // --- Lógica del SEGUNDO carrusel (NUEVO) ---
+            const carousel2 = document.getElementById('imageCarousel2');
+            if (carousel2) {
+                const items = carousel2.querySelectorAll('.carousel-item-3d');
+                let radius, isCarouselDragging = false, startX = 0, currentRotation = 0, targetRotation = 0, autoRotateTimeout, animationFrameId;
+                const angle = 360 / items.length;
+
+                const updateRadius = () => {
+                    if (window.innerWidth <= 480) radius = 180;
+                    else if (window.innerWidth <= 850) radius = 220;
+                    else radius = 260;
+                };
+
+                const arrangeItems = () => {
+                    updateRadius();
+                    items.forEach((item, index) => {
+                        item.style.transform = `rotateY(${angle * index}deg) translateZ(${radius}px)`;
+                    });
+                };
+
+                const dragStart = (e) => {
+                    isCarouselDragging = true;
+                    startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                    carousel2.style.transition = 'none';
+                    stopAutoRotate();
+                };
+
+                const dragging = (e) => {
+                    if (!isCarouselDragging) return;
+                    const currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+                    const diffX = currentX - startX;
+                    const sensitivity = window.innerWidth <= 850 ? 0.7 : 0.5;
+                    targetRotation = currentRotation + diffX * sensitivity;
+                    carousel2.style.transform = `rotateY(${targetRotation}deg)`;
+                };
+
+                const dragEnd = () => {
+                    if (!isCarouselDragging) return;
+                    isCarouselDragging = false;
+                    carousel2.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    currentRotation = targetRotation;
+                    restartAutoRotateWithDelay();
+                };
+
+                // Animación diferente para distinguirlo (gira en sentido contrario)
+                const animateRotation = () => {
+                    if (isCarouselDragging) return;
+                    const rotationSpeed = 0.25;
+                    targetRotation += rotationSpeed;
+                    currentRotation += rotationSpeed;
+                    carousel2.style.transform = `rotateY(${targetRotation}deg)`;
+                    animationFrameId = requestAnimationFrame(animateRotation);
+                };
+
+                const stopAutoRotate = () => {
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    clearTimeout(autoRotateTimeout);
+                };
+
+                const startAutoRotate = () => {
+                    stopAutoRotate();
+                    animationFrameId = requestAnimationFrame(animateRotation);
+                };
+
+                const restartAutoRotateWithDelay = () => {
+                    stopAutoRotate();
+                    autoRotateTimeout = setTimeout(startAutoRotate, 3000);
+                };
+
+                carousel2.addEventListener('mousedown', dragStart);
+                document.addEventListener('mousemove', dragging);
+                document.addEventListener('mouseup', dragEnd);
+                carousel2.addEventListener('touchstart', dragStart, { passive: true });
+                carousel2.addEventListener('touchmove', dragging, { passive: true });
+                carousel2.addEventListener('touchend', dragEnd);
+
+                const modalObserver = new MutationObserver(mutations => {
+                    mutations.forEach(mutation => {
+                        if (mutation.attributeName === 'class') {
+                            const isActive = mutation.target.classList.contains('active');
+                            if (isActive) {
+                                arrangeItems();
+                                startAutoRotate();
+                            } else {
+                                stopAutoRotate();
+                            }
+                        }
+                    });
+                });
+                modalObserver.observe(modalContainer, { attributes: true });
+                window.addEventListener('resize', arrangeItems);
+            }
+
+        }
+
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init3D);
+        } else {
+            init3D();
+        }
+    </script>
+</body>
+
+</html>

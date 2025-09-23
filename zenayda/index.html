@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Cumpleaños, Zenayda</title>
+
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #1a0a1a;
+      color: #ffe4f1;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2rem;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: arcoiris 6s linear infinite;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes arcoiris {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .subtitulo {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 0.5rem;
+      color: #ff9bb8;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mensaje {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0.5rem auto 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rosas {
+      width: 250px;
+      border-radius: 10px;
+      margin: 1rem 0;
+      box-shadow: 0 6px 20px rgba(255, 150, 200, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Estrellas cayendo */
+    .estrella {
+      position: fixed; /* <-- fija en la pantalla */
+      top: -10px;
+      color: #fff;
+      font-size: 1rem;
+      animation: caer linear forwards;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1; /* detrás del contenido */
+    }
+
+    @keyframes caer {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="titulo">🎂 Feliz Cumpleaños, Zenayda 🎂</h1>
+
+  <!-- Aquí reemplaza con la foto de Facebook -->
+  <img src="https://scontent.flim4-2.fna.fbcdn.net/v/t51.82787-15/523333810_18064595267236819_1650254362589672556_n.webp?stp=dst-jpg_tt6&_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEXoMteyS6X82hItTpXnDCGPZHvWNwYKds9ke9Y3Bgp258VzKy2Rlkozfs0c4ul9LwpZvY_3QjAld53a4l7GcEc&_nc_ohc=jpB2yGy1DAsQ7kNvwFnWyPu&_nc_oc=AdlXTiFG7Y_mrQFgejhyE98neLbMhx2Bsd70hTKbvmYG1EVyPuVplPvILqHpRcz72MY&_nc_zt=23&_nc_ht=scontent.flim4-2.fna&_nc_gid=lPyx5oWiX5-j2qK0DciG9Q&oh=00_AfX3uhoH6k5j_Rgknup2-HgC1xURoVYaBNy02MC8jEt2HQ&oe=68BA10D3" alt="Foto especial de Zenayda" class="rosas">
+
+  <p class="mensaje  "> QUE ESTE DÍA SEA LO  MEJOR PARA TI </p>
+  <p class="mensaje"> QUE LO DISFRUTES Y DE DESEO UN FELIZ CUMPLEAÑOS  A DISTANCIA</p>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzIvr5-xq6-vMUdgID64T15hzzHYW9azjBnA&s" alt="" class="rosas">
+
+  <!-- Secciones -->
+  <h2 class="subtitulo">🌸 Bendiciones 🌸</h2>
+  <p class="mensaje">Que tu vida esté llena de luz, alegría y esperanza.</p>
+  <p class="mensaje">Hoy brillas más que nunca, porque el cielo celebra tu existencia.</p>
+
+  <h2 class="subtitulo">💖 Tu esencia 💖</h2>
+  <p class="mensaje">Tu sonrisa ilumina cada lugar que visitas.</p>
+  <p class="mensaje">Tienes un corazón tan noble que inspira a los demás.</p>
+  <p class="mensaje">Eres única, especial y un regalo de Dios para el mundo.</p>
+
+  <h2 class="subtitulo">🌟 Deseos 🌟</h2>
+  <p class="mensaje">Que tus sueños se cumplan y tus metas florezcan.</p>
+  <p class="mensaje">Que cada día te acerque a lo que más anhelas.</p>
+  <p class="mensaje">Que tu vida sea como un jardín lleno de flores hermosas.</p>
+
+  <h2 class="subtitulo">🎁 Para ti 🎁</h2>
+  <p class="mensaje">Hoy quiero regalarte cariño en forma de palabras.</p>
+  <p class="mensaje">Quiero que nunca olvides lo valiosa que eres.</p>
+  <p class="mensaje">Celebra tu día con amor, porque mereces lo mejor.</p>
+
+  <h2 class="subtitulo">✨ Más frases para ti ✨</h2>
+  <p class="mensaje">Que tu alegría sea infinita como las estrellas.</p>
+  <p class="mensaje">Que siempre tengas motivos para sonreír.</p>
+  <p class="mensaje">Que la paz habite en tu corazón cada día.</p>
+  <!-- Frases bíblicas -->
+  <p class="mensaje">“Jehová te bendiga, y te guarde; Jehová haga resplandecer su rostro sobre ti.” (Números 6:24-25)</p>
+  <p class="mensaje">“El Señor cumplirá en ti su propósito; su misericordia es para siempre.” (Salmo 138:8)</p>
+  <p class="mensaje">“Dios está en medio de ella; no será conmovida. Dios la ayudará al clarear la mañana.” (Salmo 46:5)</p>
+  <!-- Frases de Elena G. de White -->
+  <p class="mensaje">“Cristo es el centro de toda verdadera felicidad; en Él encontramos paz y descanso.” – E.G.W.</p>
+  <p class="mensaje">“La oración es la llave en la mano de la fe para abrir el almacén del cielo.” – E.G.W.</p>
+  <p class="mensaje">“El amor de Dios hacia sus hijos es infinito, más allá de toda comprensión humana.” – E.G.W.</p>
+
+  <h2 class="subtitulo">🌹 Mensaje final 🌹</h2>
+  <p class="mensaje">Zenayda, hoy celebramos tu vida y todo lo bello que hay en ti.</p>
+  <p class="mensaje">Eres motivo de gratitud y de alegría para quienes te queremos.</p>
+  <p class="mensaje">¡Feliz cumpleaños! Que sea el inicio de un año lleno de bendiciones. 🎉</p>
+
+
+  <h2 class="subtitulo">UN ABRAZO A DISTANCIA</h2>
+<img src="data:image/jpeg;base64,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" alt="">
+
+  <script>
+  // Generador de estrellas cayendo que permanecen en toda la pantalla
+  function crearEstrella() {
+    const estrella = document.createElement("div");
+    estrella.classList.add("estrella");
+    estrella.textContent = "✨";
+
+    // Posición horizontal aleatoria
+    estrella.style.left = Math.random() * window.innerWidth + "px";
+
+    // Tamaño aleatorio
+    estrella.style.fontSize = (Math.random() * 15 + 10) + "px";
+
+    // Duración distinta para cada estrella
+    const duracion = Math.random() * 3 + 3; 
+    estrella.style.animationDuration = duracion + "s";
+
+    document.body.appendChild(estrella);
+
+    // Remover cuando termina la animación
+    setTimeout(() => {
+      estrella.remove();
+    }, duracion * 1000);
+  }
+
+  // Crear muchas estrellas (cada 100ms ≈ 10 por segundo)
+  setInterval(crearEstrella, 100);
+  </script>
+</body>
+</html>
